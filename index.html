@@ -10,33 +10,80 @@
             padding: 0;
             overflow: hidden;
             box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
         body {
             background: #0d162b; /* Adjusted to match 1win's theme */
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
+            text-align: center;
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         img {
             width: 80vw;
             height: auto;
-            max-height: 80vh;
+            max-height: 70vh;
             object-fit: contain;
-            animation: bounce 2s ease-in-out infinite;
+            animation: bounce 2s ease-in-out infinite, pulse 1.5s infinite ease-in-out;
+            filter: drop-shadow(0px 0px 15px #00c3ff);
         }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .bonus-text {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 0px 0px 10px #00c3ff;
+            margin-top: 20px;
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0px 0px 10px #00c3ff; }
+            to { text-shadow: 0px 0px 20px #00ffcc; }
+        }
+        #countdown {
+            font-size: 1.2rem;
+            margin-top: 15px;
+        }
     </style>
     <script>
+        let timeLeft = 5;
+        function startCountdown() {
+            const countdownEl = document.getElementById("countdown");
+            setInterval(() => {
+                if (timeLeft > 0) {
+                    countdownEl.innerText = `${timeLeft}...`;
+                    timeLeft--;
+                }
+            }, 1000);
+        }
         setTimeout(function() {
-            window.location.href = "https://1weyd.com"; // Change to your desired link
-        }, 5000); // Redirect after 10 seconds
+            document.body.style.transition = "opacity 1s ease-out";
+            document.body.style.opacity = "0";
+            setTimeout(() => {
+                window.location.href = "https://1weyd.com";
+            }, 1000);
+        }, 4000);
+        window.onload = startCountdown;
     </script>
 </head>
 <body>
     <img src="https://i.ibb.co/gMBDV4yz/my1win.jpg" alt="FREEGUY">
+    <div class="bonus-text">🔥 Get a 500% Betting Bonus Now! 🔥</div>
+    <p id="countdown"></p>
 </body>
 </html>
