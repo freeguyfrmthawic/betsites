@@ -13,7 +13,7 @@
             font-family: Arial, sans-serif;
         }
         body {
-            background: #0d162b; /* Adjusted to match 1win's theme */
+            background: radial-gradient(circle, #0d162b, #001f3f);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,11 +21,15 @@
             height: 100vh;
             text-align: center;
             color: white;
-            animation: fadeIn 1s ease-in-out;
+            animation: fadeIn 1s ease-in-out, bgMove 5s infinite alternate;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+        @keyframes bgMove {
+            from { background-position: 0% 50%; }
+            to { background-position: 100% 50%; }
         }
         img {
             width: 80vw;
@@ -49,24 +53,57 @@
             font-weight: bold;
             text-shadow: 0px 0px 10px #00c3ff;
             margin-top: 20px;
-            animation: glow 1.5s infinite alternate;
+            animation: slideIn 1s ease-out forwards, glow 1.5s infinite alternate;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         @keyframes glow {
             from { text-shadow: 0px 0px 10px #00c3ff; }
             to { text-shadow: 0px 0px 20px #00ffcc; }
         }
-        #countdown {
-            font-size: 1.2rem;
-            margin-top: 15px;
+        .cta-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(45deg, #00c3ff, #00ffcc);
+            border-radius: 10px;
+            text-decoration: none;
+            box-shadow: 0px 0px 15px #00c3ff;
+            animation: pulseButton 1.5s infinite alternate;
+        }
+        @keyframes pulseButton {
+            from { transform: scale(1); box-shadow: 0px 0px 15px #00c3ff; }
+            to { transform: scale(1.1); box-shadow: 0px 0px 25px #00ffcc; }
+        }
+        .progress-bar {
+            width: 80%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        #progress {
+            height: 100%;
+            width: 100%;
+            background: #00c3ff;
+            transition: width linear;
         }
     </style>
     <script>
         let timeLeft = 5;
         function startCountdown() {
             const countdownEl = document.getElementById("countdown");
+            const progressBar = document.getElementById("progress");
             setInterval(() => {
                 if (timeLeft > 0) {
                     countdownEl.innerText = `${timeLeft}...`;
+                    progressBar.style.width = (timeLeft / 5) * 100 + "%";
                     timeLeft--;
                 }
             }, 1000);
@@ -78,12 +115,18 @@
                 window.location.href = "https://1weyd.com";
             }, 1000);
         }, 4000);
-        window.onload = startCountdown;
+        window.onload = function() {
+            startCountdown();
+            document.getElementById("bonusSound").play();
+        };
     </script>
 </head>
 <body>
+    <audio id="bonusSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
     <img src="https://i.ibb.co/gMBDV4yz/my1win.jpg" alt="FREEGUY">
     <div class="bonus-text">🔥 Get a 500% Betting Bonus Now! 🔥</div>
+    <a href="https://1weyd.com" class="cta-button">Claim Bonus Now</a>
     <p id="countdown"></p>
+    <div class="progress-bar"><div id="progress"></div></div>
 </body>
 </html>
