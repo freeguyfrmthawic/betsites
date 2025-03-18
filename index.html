@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Image</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0d162b; /* Adjusted to match 1win's theme */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        img {
+            width: 80vw;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+    <script>
+        setTimeout(function() {
+            window.location.href = "https://1weyd.com"; // Change to your desired link
+        }, 10000); // Redirect after 10 seconds
+    </script>
+</head>
+<body>
+    <img src="https://i.ibb.co/gMBDV4yz/my1win.jpg" alt="FREEGUY">
+</body>
+</html>
